@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('utensilios', function (Blueprint $table) {
             $table->id();
-            $table->string('ute_nome', 50);
-            $table->integer('ute_quantidade');
-            $table->string('ute_resistencia', 20);
+            $table->string('uteNome', 50);
+            $table->string('quantidade');
+            $table->string('resistencia', 20);
             $table->timestamps();
         });
     }

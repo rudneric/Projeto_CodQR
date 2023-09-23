@@ -2,11 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdmController;
-use App\Http\Controllers\PublicacaoController;
 use App\Http\Controllers\UtensilioController;
-use App\Http\Controllers\VideoController;
-use App\Models\Publicacao;
-use App\Models\Video;
+use App\Http\Controllers\QRCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,24 +19,21 @@ use App\Models\Video;
 Route::get('/', function () {
     return view('welcome');
 });
-    //Rota para a página de login de ADM
-Route::get('/adm/login', [AdmController::class, 'index']);
-
-    //Rota simples para a tela onde o ADM pode fazer os cadastros
-Route::post('/cadastros',function(){
-    return view('adm.options');
+Route::get('/qrcode', function(){
+    return view('qrcode');
 });
 
-    //Rotas para os Utensilios
-Route::get('/cadastro/utensilios', [UtensilioController::class, 'create']);
-Route::post('/cadastros', [UtensilioController::class, 'show']);
+Route::get('/gerar-qrcode', [QRCodeController::class, 'gerarQRCode']);
+Route::get('/redirecionar', [QRCodeController::class, 'redirecionar']);
 
-    //Rotas para as Publicações
-Route::get('/cadastro/publicacao', [PublicacaoController::class, 'create']);  
-Route::post('/cadastros', [PublicacaoController::class, 'show']); 
+    //Rota do Administrador
+// Route::get('/adm/login', [AdmController::class, 'index']);
 
-   //Rotas para os videos
-Route::get('/cadastro/Video', [VideoController::class, 'create']);  
-Route::post('/cadastros', [VideoController::class, 'show']);
+Route::get('/adm/cadastros', [AdmController::class, 'show']);
 
-    
+Route::get('/cadastro/utensilio', [UtensilioController::class, 'create']);
+Route::post('/adm/cadastros', [UtensilioController::class, 'store']);
+
+Route::get('/login', [AdmController::class, 'index']);
+Route::get('/register', [AdmController::class, 'create']);
+Route::post('/register', [AdmController::class, 'store']);

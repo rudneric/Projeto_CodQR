@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('vid_titulo');
-            $table->string('vid_video');
+            $table->string('VidTitulo');
+            $table->string('vidVideo');
             $table->timestamps();
         });
     }
