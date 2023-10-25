@@ -33,7 +33,3 @@ Route::get('/adm/cadastros', [AdmController::class, 'show']);
 
 Route::get('/cadastro/utensilio', [UtensilioController::class, 'create']);
 Route::post('/adm/cadastros', [UtensilioController::class, 'store']);
-
-Route::get('/login', [AdmController::class, 'index']);
-Route::get('/register', [AdmController::class, 'create']);
-Route::post('/register', [AdmController::class, 'store']);
