@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('publicacoes', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
+            $table->string('video');
+            $table->string('imagem');
             $table->Text('descricao')->nullable();
-            $table->string('linkVideo');
+
+            $table->unsignedBigInteger('pubUserCodigo');
+            $table->foreign('pubUserCodigo')->references('id')->on('users');
+  
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicacaos');
+        Schema::dropIfExists('publicacoes');
     }
 };

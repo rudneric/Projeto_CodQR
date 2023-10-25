@@ -10,4 +10,10 @@ class Utensilio extends Model
     use HasFactory;
 
     protected $table = 'utensilios';
+
+    protected $fillable = [
+        'uteNome',
+        'quantidade',
+        'resistencia',
+    ];
 }

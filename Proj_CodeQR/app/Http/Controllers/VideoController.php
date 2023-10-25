@@ -16,31 +16,48 @@ class VideoController extends Controller
 
     public function create()
     {
-        //
+        return view('cadastros.cadVideos');
     }
 
-    public function store(StoreVideoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $video = new Video();
+
+        $video->vidTitulo = $request->vidTitulo;
+        $video->vidVideo = $request->vidVideo;
+
+        $video->save();
+
+        return redirect('dashboard');
     }
 
     public function show(Request $request)
     {
-        // 
+        //
     }
 
-    public function edit(Video $idoso)
+    public function edit(Video $video)
     {
         //
     }
 
-    public function update(UpdateVideoRequest $request, Video $idoso)
+    public function update(Request $request, Video $video)
     {
-        //
+
+        $video->update( [
+            'vidTitulo'=> $request->vidTitulo,
+            'vidVideo'=> $request->vidVideo,
+        ]);
+
+        return redirect('/exibe/itens/banco');
     }
 
-    public function destroy(Video $idoso)
+    public function destroy(Request $request)
     {
-        //
+        Video::destroy($request->id);
+
+        $request->session();
+
+        return redirect('/exibe/itens/banco');
     }
 }

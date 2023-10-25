@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\ExibirDadosController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicacaoController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdmController;
-use App\Http\Controllers\UtensilioController;
 use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\UtensilioController;
+use App\Http\Controllers\VideoController;
+use App\Models\Publicacao;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +23,44 @@ use App\Http\Controllers\QRCodeController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
 Route::get('/qrcode', function(){
     return view('qrcode');
 });
 
+// ROTA DO QRCODE
 Route::get('/gerar-qrcode', [QRCodeController::class, 'gerarQRCode']);
 Route::get('/redirecionar', [QRCodeController::class, 'redirecionar']);
 
-    //Rota do Administrador
-// Route::get('/adm/login', [AdmController::class, 'index']);
+// ROTAS DOS UTENSILIOS 
+Route::get('/cadastro/utensilio', [UtensilioController::class, 'create'])->middleware('auth');
+Route::post('/utensilio/store', [UtensilioController::class, 'store']);
+Route::delete('/utensilio/delete/{id}', [UtensilioController::class, 'destroy'])->middleware('auth');
+Route::put('/utensilio/update/{utensilio}', [UtensilioController::class, 'update'])->middleware('auth');
 
-Route::get('/adm/cadastros', [AdmController::class, 'show']);
+// ROTAS DOS VIDEOS
+Route::get('/cadastro/video', [VideoController::class, 'create'])->middleware('auth');
+Route::post('/video/store', [VideoController::class, 'store'])->name('video.store');
+Route::delete('/video/delete/{id}', [VideoController::class, 'destroy'])->middleware('auth');
+Route::put('/video/update/{video}', [VideoController::class, 'update'])->middleware('auth');
 
-Route::get('/cadastro/utensilio', [UtensilioController::class, 'create']);
-Route::post('/adm/cadastros', [UtensilioController::class, 'store']);
+// ROTAS DAS PUBLICACOES
+Route::get('/cadastro/publicacao', [PublicacaoController::class, 'create'])->middleware('auth');
+Route::post('/publicacao/store', [PublicacaoController::class, 'store'])->middleware('auth');
+Route::delete('/publicacao/delete/{id}', [PublicacaoController::class, 'destroy'])->middleware('auth');
+Route::put('/publicacao/update/{publicacao}', [PublicacaoController::class, 'update'])->middleware('auth');
+
+// Rota para coletar e exibir os itens do banco de dados
+Route::get('/exibe/itens/banco', [ExibirDadosController::class, 'show'])->middleware('auth');

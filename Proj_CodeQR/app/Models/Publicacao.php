@@ -10,4 +10,11 @@ class Publicacao extends Model
     use HasFactory;
 
     protected $table = 'publicacoes';
+
+    protected $fillable = [
+        'titulo',
+        'descricao',
+        'imagem',
+        'video',
+    ];
 }

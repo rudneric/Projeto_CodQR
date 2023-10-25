@@ -5,23 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Utensilio;
 //use App\Http\Requests\StoreUtensilioRequest;
-use App\Http\Requests\UpdateUtensilioRequest;
+//use App\Http\Requests\UpdateUtensilioRequest;
 
 class UtensilioController extends Controller
 {
     public function index()
     {
-        //return view('welcome');
+        
     }
 
     public function create()
     {
-       return view('cadastros.cadUtensilios');
+        return view('cadastros.cadUtensilios');
     }
 
     public function store(Request $request)
     {
-        $utensilio = new Utensilio();
+        $utensilio = new Utensilio;
 
         $utensilio->uteNome = $request->uteNome;
         $utensilio->quantidade = $request->quantidade;
@@ -29,26 +29,36 @@ class UtensilioController extends Controller
 
         $utensilio->save();
 
-        return view('adm.dashboard');
+        return view('dashboard');
     }
 
-    public function show(Request $request)
+    public function show()
+    {
+       //
+    }
+
+    public function edit(Utensilio $utensilio)
     {
         //
     }
 
-    public function edit(Utensilio $idoso)
+    public function update(Request $request, Utensilio $utensilio)
     {
-        //
+        $utensilio->update([
+            'uteNome'=>$request->uteNome,
+            'quantidade'=>$request->quantidade,
+            'resistencia'=>$request->resistencia,
+        ]);
+
+        return redirect('/exibe/itens/banco');
     }
 
-    public function update(UpdateUtensilioRequest $request, Utensilio $idoso)
+    public function destroy(Request $request)
     {
-        //
-    }
+        Utensilio::destroy($request->id);
 
-    public function destroy(Utensilio $idoso)
-    {
-        //
+        $request->session();
+        
+        return redirect('/exibe/itens/banco');
     }
 }
