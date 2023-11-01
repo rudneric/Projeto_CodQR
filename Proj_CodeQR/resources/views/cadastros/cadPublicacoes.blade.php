@@ -8,7 +8,7 @@
 
 @section('content')
     <div id="utensilio-create-container" class="col-md-6 offset-md-3">
-        <h1>Cadastre seu Utensilio</h1>
+        <h1>Cadastre sua Publicação</h1>
         <form enctype="multipart/form-data" control action="{{ '/publicacao/store' }}" method="POST">
             @csrf
             <div class="form-goup">
@@ -26,9 +26,9 @@
                 </select>
             </div>
 
-            <div class="form-goup">
-                <label for="imagem">Imagem:</label>
-                <input type="file" class="form-control" id="imagem" name="imagem" placeholder="">
+             <div class="form-goup">
+                <label for="imagem">imagem</label>
+               <input type="file" class="form-control" id="imagem" name="imagem">
             </div>
 
             <div class="form-goup">

@@ -20,4 +20,12 @@ class ExibirDadosController extends Controller
 
         return view('cadastros.exibeDados', ['publicacao' => $publicacao, 'utensilio' => $utensilio, 'video' => $video]);
     }
+
+    public function verPub($id)
+    {
+        $publicacao = Publicacao::findOrFail($id);
+
+        return view('publicacao', ['publicacao' => $publicacao]);
+    }
+    
 }

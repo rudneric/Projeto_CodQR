@@ -29,7 +29,7 @@ class UtensilioController extends Controller
 
         $utensilio->save();
 
-        return view('dashboard');
+        return redirect('/exibe/itens/banco');
     }
 
     public function show()

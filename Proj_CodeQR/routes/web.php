@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\UtensilioController;
 use App\Http\Controllers\VideoController;
-use App\Models\Publicacao;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +21,10 @@ use App\Models\Publicacao;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PublicacaoController::class, 'show'])->name('dashboard')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,7 +39,7 @@ Route::get('/qrcode', function(){
 });
 
 // ROTA DO QRCODE
-Route::get('/gerar-qrcode', [QRCodeController::class, 'gerarQRCode']);
+Route::get('/gerar-qrcode/{id}', [QRCodeController::class, 'gerarQRCode']);
 Route::get('/redirecionar', [QRCodeController::class, 'redirecionar']);
 
 // ROTAS DOS UTENSILIOS 
@@ -64,3 +62,4 @@ Route::put('/publicacao/update/{publicacao}', [PublicacaoController::class, 'upd
 
 // Rota para coletar e exibir os itens do banco de dados
 Route::get('/exibe/itens/banco', [ExibirDadosController::class, 'show'])->middleware('auth');
+Route::get('/ver/publicacao/{id}', [ExibirDadosController::class, 'verPub']);

@@ -17,4 +17,5 @@ class Publicacao extends Model
         'imagem',
         'video',
     ];
+
 }

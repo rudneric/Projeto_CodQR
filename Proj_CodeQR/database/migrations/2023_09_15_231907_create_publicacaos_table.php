@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('video');
             $table->string('imagem');
             $table->Text('descricao')->nullable();
-
             $table->unsignedBigInteger('pubUserCodigo');
             $table->foreign('pubUserCodigo')->references('id')->on('users');
   

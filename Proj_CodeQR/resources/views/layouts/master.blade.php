@@ -9,7 +9,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
     <title>@yield('title')MUL</title>
 </head>
 
@@ -50,8 +51,9 @@
                                     Cadastros
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/cadastro/utensilio">Utensilio</a>
-                                    <a class="dropdown-item" href="/cadastro/video">Video</a>
+                                    <button class="dropdown-item btn btn-target" data-bs-toggle="modal"
+                                        data-bs-target="#createUtensilioModal">Utensilio</button>
+                                    <a class="dropdown-item " href="/cadastro/video">Video</a>
                                     <a class="dropdown-item" href="/cadastro/publicacao">Publicação</a>
                                 </div>
                             </div>
@@ -82,6 +84,44 @@
 
     <div class="container">
         @yield('content')
+        {{-- MODAL CADASTRO DE UTENSILIO --}}
+        <div class="modal fade" id="createUtensilioModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-heder">
+                        <h4 class="modal-title">Cadastrando de Utensilio</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ '/utensilio/store' }}" method="POST">
+                            @csrf
+                            <div class="form-goup">
+                                <label for="uteNome">Nome:</label>
+                                <input type="text" class="form-control" id="uteNome" name="uteNome"
+                                    placeholder="Nome">
+                            </div>
+
+                            <div class="form-goup">
+                                <label for="quantidade">Quantidade:</label>
+                                <input type="text" class="form-control" id="quantidade" name="quantidade"
+                                    placeholder="Quantidade">
+                            </div>
+
+                            <div class="form-goup">
+                                <label for="resistencia">Resistencia:</label>
+                                <select type="text" class="form-control" id="resistencia" name="resistencia">
+                                    <option>Selecione</option>
+                                    <option value="Frágil">Frágil</option>
+                                    <option value="Médio">Médio</option>
+                                    <option value="Forte">Forte</option>
+                            </div>
+                            <input type="submit" class="btn btm-primary" value="Criar Utensilio">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

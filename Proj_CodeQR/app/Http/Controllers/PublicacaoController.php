@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Publicacao;
 use App\Models\Video;
 use App\Models\Utensilio;
-use App\Http\Requests\UpdatePublicacaoRequest;
 use Illuminate\Support\Facades\Storage;
 
 class PublicacaoController extends Controller
@@ -34,21 +33,24 @@ class PublicacaoController extends Controller
         $publicacao->video = $request->video;
         $publicacao->pubUserCodigo = $request->pubUserCodigo;
 
-        if ($request->hasFile('imagem') && $request->imagem->isValid()) {
-            $imagePath = $request->imagem->store('publicacoes');
-
-            $publicacao['imagem'] = $imagePath;
+        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $requestImage = $request->file('imagem'); // Corrigir chamada de método
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now"))  . "." . $extension;
+            $requestImage->move(public_path('img/publicacoes'), $imageName);
+            $publicacao['imagem'] = $imageName; // Corrigir atribuição do nome do arquivo
         }
+        
         $publicacao->save();
 
         return redirect('dashboard');
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
         $publicacao = Publicacao::all();
 
-        return view('dashoard', ['publicacao' => $publicacao]);
+        return view('dashboard', ['publicacao' => $publicacao]);
     }
 
     public function edit(Publicacao $publicacao)
@@ -63,16 +65,18 @@ class PublicacaoController extends Controller
             'descricao' => $request->descricao,
         ]);
 
-        if ($request->hasFile('imagem') && $request->imagem->isValid()) {
+        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
             if ($publicacao->imagem && Storage::fileExists($publicacao->imagem)) {
                 Storage::delete($publicacao->imagem);
             }
-            $imagePath = $request->imagem->store('publicacoes');
-
-            $publicacao['imagem'] = $imagePath;
+            $requestImage = $request->file('imagem'); 
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now"))  . "." . $extension;
+            $requestImage->move(public_path('img/publicacoes'), $imageName);
+            $publicacao['imagem'] = $imageName; // Corrigir atribuição do nome do arquivo
         }
 
-        return redirect('/exibe/itens/banco');
+        return redirect('dashboard');
     }
 
     public function destroy(Request $request)
@@ -81,6 +85,6 @@ class PublicacaoController extends Controller
 
         $request->session();
 
-        return redirect('/exibe/itens/banco');
+        return redirect('dashboard');
     }
 }
