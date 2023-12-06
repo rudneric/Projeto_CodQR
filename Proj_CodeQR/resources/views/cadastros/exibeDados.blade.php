@@ -8,8 +8,8 @@
 
 @section('content')
     <!-- OPEN TABLE UTENSILIO-->
-    <table class="table table-bordered caption-top">
-        <caption>Lista de Utensilios</caption>
+    <table class="table caption-top table-striped text-center">
+        <caption class="text-center fw-bolder"><h5>Lista de Utensilios</h5></caption>
         <thead>
             <tr>
                 <th scope="row ">ID</th>
@@ -22,16 +22,17 @@
         <tbody>
             @foreach ($utensilio as $item)
                 <tr>
-                    <th scope="row text-center">{{ $item->id }}</th>
+                    <th scope="row">{{ $item->id }}</th>
                     <td class="text-center ">{{ $item->uteNome }}</td>
                     <td class="text-center">{{ $item->quantidade }}</td>
                     <td class="text-center">{{ $item->resistencia }}</td>
-                    <td class="text-center"><button class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#editUtensilioModal_{{ $item->id }}">Editar</button>
+                    <td class="text-center"><button class="btn btn-primary rounded-circle" data-bs-toggle="modal"
+                            data-bs-target="#editUtensilioModal_{{ $item->id }}"><i
+                            class="bi bi-pencil-square"></i></button>
                         <form action="/utensilio/delete/{{ $item->id }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">Deletar</button>
+                            <button class="btn btn-danger rounded-circle"><i class="bi bi-trash3"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -41,7 +42,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-heder">
-                                <h4 class="modal-title">Editando {{ $item->uteNome }}</h4>
+                                <h4 class="modal-title text-center">Editando {{ $item->uteNome }}</h4>
                             </div>
                             <div class="modal-body">
                                 <form action="{{ url('/utensilio/update', $item->id) }}" method="POST">
@@ -78,8 +79,8 @@
     <!-- CLOSE TABLE UTENSILIO-->
 
     <!-- OPEN TABLE VIDEOS -->
-    <table class="table table-bordered caption-top">
-        <caption>Lista de videos</caption>
+    <table class="table table-striped table-hover caption-top text-center">
+        <caption class="text-center fw-bolder"><h5>Lista de videos</h5></caption>
         <thead>
             <tr>
                 <th scope="col ">ID</th>
@@ -94,13 +95,14 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td class="text-center">{{ $item->vidTitulo }}</td>
                     <td class="text-center">{{ $item->vidVideo }}</td>
-                    <td class="text-center"><button class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#editVideoModal_{{ $item->id }}">Update</button>
+                    <td class="text-center"><button class="btn btn-primary rounded-circle" data-bs-toggle="modal"
+                            data-bs-target="#editVideoModal_{{ $item->id }}"><i
+                            class="bi bi-pencil-square"></i></button>
                         <form action="/video/delete/{{ $item->id }}" method="POST">
 
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">Deletar</button>
+                            <button class="btn btn-danger rounded-circle"><i class="bi bi-trash3"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -109,7 +111,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-heder">
-                                <h4 class="modal-title">Editando {{ $item->vidTitulo }}</h4>
+                                <h4 class="modal-title text-center">Editando {{ $item->vidTitulo }}</h4>
                             </div>
                             <div class="modal-body">
                                 <form action="{{ url('/video/update', $item->id) }}" method="POST">

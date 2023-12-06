@@ -24,8 +24,19 @@ class PublicacaoController extends Controller
         return view('cadastros.cadPublicacoes', ['video' => $video, 'utensilio' => $utensilio]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Publicacao $publicacao)
     {
+        // $publicacao = $request->validate([
+        //     'imagem' => 'required|mimes:png,jpg,jpeg',
+        //     'gif' => 'required|mimes:gif',
+        // ]);
+        // $publicacao = new Publicacao();
+
+        // $publicacao->titulo = $request->titulo;
+        // $publicacao->descricao = $request->descricao;
+        // $publicacao->video = $request->video;
+        // $publicacao->pubUserCodigo = $request->pubUserCodigo;
+
         $publicacao = new Publicacao();
 
         $publicacao->titulo = $request->titulo;
@@ -39,8 +50,26 @@ class PublicacaoController extends Controller
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now"))  . "." . $extension;
             $requestImage->move(public_path('img/publicacoes'), $imageName);
             $publicacao['imagem'] = $imageName; // Corrigir atribuição do nome do arquivo
+
         }
-        
+
+        // Supondo que você está recebendo um array de imagens de algum lugar, como um formulário
+        // $arrayDeImagens = $request->file('gifs[]');
+
+
+        // if (!empty($arrayDeImagens)) {
+        //     // Se $publicacao->gif for nulo, inicialize com uma string vazia
+        //     $publicacao->gif = $publicacao->gif ?? '';
+
+        //     foreach ($arrayDeImagens as $imagem) {
+        //         $extension = $imagem->extension();
+        //         $imageName = md5($imagem->getClientOriginalName() . strtotime("now")) . "." . $extension;
+        //         $imagem->move(public_path('gifs[]'), $imageName);
+
+        //         // Adicione a nova imagem à string separada por vírgula
+        //         $publicacao->gif .= ($publicacao->gif ? ',' : '') . $imageName;
+        //     }
+        // }
         $publicacao->save();
 
         return redirect('dashboard');
@@ -65,21 +94,10 @@ class PublicacaoController extends Controller
             'descricao' => $request->descricao,
         ]);
 
-        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            if ($publicacao->imagem && Storage::fileExists($publicacao->imagem)) {
-                Storage::delete($publicacao->imagem);
-            }
-            $requestImage = $request->file('imagem'); 
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now"))  . "." . $extension;
-            $requestImage->move(public_path('img/publicacoes'), $imageName);
-            $publicacao['imagem'] = $imageName; // Corrigir atribuição do nome do arquivo
-        }
-
         return redirect('dashboard');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, Publicacao $publicacao)
     {
         Publicacao::destroy($request->id);
 

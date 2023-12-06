@@ -24,7 +24,7 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/dashboard', [PublicacaoController::class, 'show'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [PublicacaoController::class, 'show'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

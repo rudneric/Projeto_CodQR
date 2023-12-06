@@ -15,6 +15,7 @@ class Publicacao extends Model
         'titulo',
         'descricao',
         'imagem',
+        'gif' => '[]',
         'video',
     ];
 

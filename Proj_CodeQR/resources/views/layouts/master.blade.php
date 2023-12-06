@@ -15,36 +15,40 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="background: white">
         @yield('navbar')
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-xl shadow-5-strong">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/dashboard">MUL</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="bi mobile-nav-toggle bi-list border-0"></i>
                 </button>
+
+                {{-- telinha do hamburge --}}
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/dashboard">Página Inicial</a>
+                            <a class="nav-link text-dark" href="/dashboard">Página de Usuário</a>
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                <a class="nav-link text-dark nav-inline-primary" href="{{ route('login') }}">Login</a>
                             </li>
                         @endguest
 
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Novo User</a>
+                                <a class="nav-link text-dark" href="{{ route('register') }}">Novo User</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="/exibe/itens/banco">Itens Cadastrados</a>
+                                <a class="nav-link text-dark" href="/exibe/itens/banco">Itens Cadastrados</a>
                             </li>
 
+                            {{-- dropdown de cadastros --}}
                             <div class="dropdown">
                                 <button class="btn btn-transparent dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,7 +72,6 @@
                             {{ Auth::user()->name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Alguma ação</a>
                             <a class="dropdown-item" href="{{ route('register') }}">Novo User</a>
                             <div class="dropdown-divider"></div>
                             <form action="{{ url('/logout') }}" method="POST">
@@ -84,29 +87,33 @@
 
     <div class="container">
         @yield('content')
+    <div class="bg-image">
+        
+    </div>
+    
         {{-- MODAL CADASTRO DE UTENSILIO --}}
         <div class="modal fade" id="createUtensilioModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-heder">
-                        <h4 class="modal-title">Cadastrando de Utensilio</h4>
+                        <h4 class="modal-title text-center">Cadastro de Utensilio</h4>
                     </div>
                     <div class="modal-body">
                         <form action="{{ '/utensilio/store' }}" method="POST">
                             @csrf
-                            <div class="form-goup">
+                            <div class="form-goup mt-3">
                                 <label for="uteNome">Nome:</label>
                                 <input type="text" class="form-control" id="uteNome" name="uteNome"
                                     placeholder="Nome">
                             </div>
 
-                            <div class="form-goup">
+                            <div class="form-goup mt-3">
                                 <label for="quantidade">Quantidade:</label>
                                 <input type="text" class="form-control" id="quantidade" name="quantidade"
                                     placeholder="Quantidade">
                             </div>
 
-                            <div class="form-goup">
+                            <div class="form-goup mt-3">
                                 <label for="resistencia">Resistencia:</label>
                                 <select type="text" class="form-control" id="resistencia" name="resistencia">
                                     <option>Selecione</option>
@@ -114,7 +121,7 @@
                                     <option value="Médio">Médio</option>
                                     <option value="Forte">Forte</option>
                             </div>
-                            <input type="submit" class="btn btm-primary" value="Criar Utensilio">
+                            <input type="submit" class="form-control btn btn-outline-warning rounded-pill shadow-sm mt-3 rounded" value="Criar" >
                         </form>
                     </div>
                 </div>
@@ -123,6 +130,7 @@
 
 
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
