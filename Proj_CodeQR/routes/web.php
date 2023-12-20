@@ -41,6 +41,7 @@ Route::get('/qrcode', function(){
 // ROTA DO QRCODE
 Route::get('/gerar-qrcode/{id}', [QRCodeController::class, 'gerarQRCode']);
 Route::get('/redirecionar', [QRCodeController::class, 'redirecionar']);
+Route::get('/scan/qrcode', [QRCodeController::class, 'show']);
 
 // ROTAS DOS UTENSILIOS 
 Route::get('/cadastro/utensilio', [UtensilioController::class, 'create'])->middleware('auth');

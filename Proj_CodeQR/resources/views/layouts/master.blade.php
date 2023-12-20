@@ -10,16 +10,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
+
+    <link rel="shortcut icon" type="imagex/png" href="/img/img_site/atomo.png">
     <title>@yield('title')MUL</title>
 </head>
 
 <body>
     <div class="container-fluid" style="background: white">
         @yield('navbar')
-        <nav class="navbar navbar-expand-xl shadow-5-strong">
+        <nav class="navbar navbar-expand-lg shadow-5-strong">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/dashboard">MUL</a>
+                <a class="navbar-brand" href="/dashboard"><img src="/img/img_site/atomo.svg" width="40"
+                        height="40" alt=""></a>
 
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -87,10 +89,7 @@
 
     <div class="container">
         @yield('content')
-    <div class="bg-image">
-        
-    </div>
-    
+
         {{-- MODAL CADASTRO DE UTENSILIO --}}
         <div class="modal fade" id="createUtensilioModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -121,7 +120,9 @@
                                     <option value="Médio">Médio</option>
                                     <option value="Forte">Forte</option>
                             </div>
-                            <input type="submit" class="form-control btn btn-outline-warning rounded-pill shadow-sm mt-3 rounded" value="Criar" >
+                            <input type="submit"
+                                class="form-control btn btn-outline-warning rounded-pill shadow-sm mt-3 rounded"
+                                value="Criar">
                         </form>
                     </div>
                 </div>

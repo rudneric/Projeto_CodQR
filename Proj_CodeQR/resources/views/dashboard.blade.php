@@ -3,9 +3,11 @@
 @section('head')
 @endsection
 
+@section('navbar')
+@endsection
+
 @section('content')
     <div class="container">
-        <div class="bg-image col-md-6 offset-md-3 opacity-25 position-fixed"  style="background-image: url('img/img_site/atomo.png'); height: 75vh; width: 75vh;"></div>
         <div class="row mt-4">
             @forelse ($publicacao as $item)
                 <div class="col col-sm-4">
@@ -70,8 +72,17 @@
             @endforelse
         </div>
 
+        <button class="btn btn-success btn-lg border-0 rounded" onclick="redirecionarParaCamera()"><i class="bi bi-camera"></i></button>
 
+    <script>
+        // Função para redirecionar para a página com o leitor de QR Code
+        function redirecionarParaCamera() {
+            window.location.href = '/scan/qrcode';
+            // NOTA: O redirecionamento pode ser instantâneo, 
+            // então a câmera pode iniciar assim que a página index.html for carregada.
+        }
+    </script>
 
-
+       
     </div>
 @endsection
