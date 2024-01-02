@@ -21,7 +21,7 @@ use App\Http\Controllers\VideoController;
 */
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect('/scan/qrcode');
 });
 
 Route::get('/dashboard', [PublicacaoController::class, 'show'])->name('dashboard');
@@ -45,7 +45,7 @@ Route::get('/scan/qrcode', [QRCodeController::class, 'show']);
 
 // ROTAS DOS UTENSILIOS 
 Route::get('/cadastro/utensilio', [UtensilioController::class, 'create'])->middleware('auth');
-Route::post('/utensilio/store', [UtensilioController::class, 'store']);
+Route::post('/utensilio/store', [UtensilioController::class, 'store'])->middleware('auth');
 Route::delete('/utensilio/delete/{id}', [UtensilioController::class, 'destroy'])->middleware('auth');
 Route::put('/utensilio/update/{utensilio}', [UtensilioController::class, 'update'])->middleware('auth');
 

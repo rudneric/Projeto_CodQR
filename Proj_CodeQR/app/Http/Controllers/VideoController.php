@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
-use App\Http\Requests\StoreVideoRequest;
-use App\Http\Requests\UpdateVideoRequest;
 
 class VideoController extends Controller
 {
@@ -22,13 +20,21 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $video = new Video();
+        $request->validate([
+            'vidTitulo' => 'required',
+            'vidVideo' => 'required',
+         ], 
+        [
+            'vidTitulo.required' => 'Campo Titulo é obrigatório!',
+            'vidVideo.required' => 'Campo Video é obrigatório!',
+        ]);
 
         $video->vidTitulo = $request->vidTitulo;
         $video->vidVideo = $request->vidVideo;
 
         $video->save();
 
-        return redirect('dashboard');
+        return view('cadastros.cadVideos');
     }
 
     public function show(Request $request)

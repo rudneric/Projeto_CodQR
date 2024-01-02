@@ -71,18 +71,6 @@
             @empty
             @endforelse
         </div>
-
-        <button class="btn btn-success btn-lg border-0 rounded" onclick="redirecionarParaCamera()"><i class="bi bi-camera"></i></button>
-
-    <script>
-        // Função para redirecionar para a página com o leitor de QR Code
-        function redirecionarParaCamera() {
-            window.location.href = '/scan/qrcode';
-            // NOTA: O redirecionamento pode ser instantâneo, 
-            // então a câmera pode iniciar assim que a página index.html for carregada.
-        }
-    </script>
-
        
     </div>
 @endsection

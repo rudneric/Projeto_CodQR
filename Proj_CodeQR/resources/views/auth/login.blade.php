@@ -26,7 +26,7 @@
                     <input id="password" class="form-control" type="password" name="password">
                 </div>
 
-                <button class="form-control mt-3 rounded-pill btn btn-outline-warning rounded-pill shadow-sm mt-3 rounded">
+                <button class="form-control btn btn-outline-warning rounded-pill shadow-sm mt-3 rounded">
                     {{ __('Acessar') }}
                 </button>
 

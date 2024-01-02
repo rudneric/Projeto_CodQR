@@ -11,17 +11,17 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <link rel="shortcut icon" type="imagex/png" href="/img/img_site/atomo.png">
-    <title>@yield('title')MUL</title>
+    <link rel="shortcut icon" type="imagex/png" href="/img/img_site/logo_oficial.png">
+    <title>@yield('title')SAB</title>
 </head>
 
 <body>
-    <div class="container-fluid" style="background: white">
+    <div class="container-fluid " style="background: white">
         @yield('navbar')
         <nav class="navbar navbar-expand-lg shadow-5-strong">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/dashboard"><img src="/img/img_site/atomo.svg" width="40"
-                        height="40" alt=""></a>
+                <a class="navbar-brand" href="/dashboard"><img src="/img/img_site/logo_oficial.png" width="70"
+                        height="70" alt=""></a>
 
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -33,17 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/dashboard">Página de Usuário</a>
+                            <a class="nav-link text-dark" href="/dashboard">Home</a>
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link text-dark nav-inline-primary" href="{{ route('login') }}">Login</a>
+                                <a class="nav-link text-dark nav-inline-primary" href="{{ route('login') }}">Adm</a>
                             </li>
                         @endguest
 
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('register') }}">Novo User</a>
+                                <a class="nav-link text-dark" href="{{ route('register') }}">Novo Adm</a>
                             </li>
 
                             <li class="nav-item">
@@ -57,8 +57,7 @@
                                     Cadastros
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <button class="dropdown-item btn btn-target" data-bs-toggle="modal"
-                                        data-bs-target="#createUtensilioModal">Utensilio</button>
+                                    <a class="dropdown-item" href="/cadastro/utensilio">Utensilio</a>
                                     <a class="dropdown-item " href="/cadastro/video">Video</a>
                                     <a class="dropdown-item" href="/cadastro/publicacao">Publicação</a>
                                 </div>
@@ -87,49 +86,9 @@
         </nav>
     </div>
 
-    <div class="container">
+    <div class="container" id="container-master">
         @yield('content')
-
-        {{-- MODAL CADASTRO DE UTENSILIO --}}
-        <div class="modal fade" id="createUtensilioModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-heder">
-                        <h4 class="modal-title text-center">Cadastro de Utensilio</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ '/utensilio/store' }}" method="POST">
-                            @csrf
-                            <div class="form-goup mt-3">
-                                <label for="uteNome">Nome:</label>
-                                <input type="text" class="form-control" id="uteNome" name="uteNome"
-                                    placeholder="Nome">
-                            </div>
-
-                            <div class="form-goup mt-3">
-                                <label for="quantidade">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade" name="quantidade"
-                                    placeholder="Quantidade">
-                            </div>
-
-                            <div class="form-goup mt-3">
-                                <label for="resistencia">Resistencia:</label>
-                                <select type="text" class="form-control" id="resistencia" name="resistencia">
-                                    <option>Selecione</option>
-                                    <option value="Frágil">Frágil</option>
-                                    <option value="Médio">Médio</option>
-                                    <option value="Forte">Forte</option>
-                            </div>
-                            <input type="submit"
-                                class="form-control btn btn-outline-warning rounded-pill shadow-sm mt-3 rounded"
-                                value="Criar">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+        
     </div>
 
 

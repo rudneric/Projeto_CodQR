@@ -16,12 +16,22 @@ class UtensilioController extends Controller
 
     public function create()
     {
-        return view('cadastros.cadUtensilios');
+        return view('cadastros.cadUtensilio');
     }
 
     public function store(Request $request)
     {
         $utensilio = new Utensilio;
+        $request->validate([
+            'uteNome' => 'required',
+            'quantidade' => 'required',
+            'resistencia' => 'required',
+         ], 
+        [
+            'uteNome.required' => 'Campo Nome é obrigatório!',
+            'quantidade.required' => 'Campo Quantidade é obrigatório!',
+            'resistencia.required' => 'Campo Resistencia é obrigatório!',
+        ]);
 
         $utensilio->uteNome = $request->uteNome;
         $utensilio->quantidade = $request->quantidade;
@@ -29,7 +39,7 @@ class UtensilioController extends Controller
 
         $utensilio->save();
 
-        return redirect('/exibe/itens/banco');
+        return view('cadastros.cadUtensilio');
     }
 
     public function show()

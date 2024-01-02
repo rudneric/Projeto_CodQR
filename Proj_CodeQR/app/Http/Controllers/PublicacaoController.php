@@ -25,20 +25,24 @@ class PublicacaoController extends Controller
     }
 
     public function store(Request $request, Publicacao $publicacao)
-    {
-        // $publicacao = $request->validate([
-        //     'imagem' => 'required|mimes:png,jpg,jpeg',
-        //     'gif' => 'required|mimes:gif',
-        // ]);
-        // $publicacao = new Publicacao();
-
-        // $publicacao->titulo = $request->titulo;
-        // $publicacao->descricao = $request->descricao;
-        // $publicacao->video = $request->video;
-        // $publicacao->pubUserCodigo = $request->pubUserCodigo;
-
+    {          
         $publicacao = new Publicacao();
 
+        $request->validate([
+            'imagem' => 'required|mimes:png,jpg,jpeg',
+            'titulo' => 'required',
+            'descricao' => 'required',
+            'video' => 'required',
+            'pubUserCodigo' => 'required',
+        ],
+        ['imagem.required' => 'Campo imagem é obrigatório!',
+            'imagem.mimes' => 'A imagem deve ser do tipo: png, jpg ou jpeg.',
+            'titulo.required' => 'Campo titulo é obrigatório!',
+            'descricao.required' => 'Campo descrição é obrigatório!',
+            'video.required' => 'Campo video é obrigatório!',
+        ]);
+        
+   
         $publicacao->titulo = $request->titulo;
         $publicacao->descricao = $request->descricao;
         $publicacao->video = $request->video;
@@ -72,7 +76,7 @@ class PublicacaoController extends Controller
         // }
         $publicacao->save();
 
-        return redirect('dashboard');
+        return view('cadastros.cadPublicacoes');
     }
 
     public function show(Request $request)
